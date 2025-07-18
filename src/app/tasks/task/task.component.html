@@ -1,7 +1,7 @@
 <article>
-  <h2>Task Title</h2>
-  <time>Due: Tomorrow</time>
-  <p>Description of the task goes here.</p>
+  <h2>{{ task.title }}</h2>
+  <time>Due: {{ task.dueDate }}</time>
+  <p>{{ task.summary }}</p>
   <p class="actions">
     <button>Complete</button>
   </p>
