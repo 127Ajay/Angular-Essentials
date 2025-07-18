@@ -8,6 +8,6 @@ import { Component, Input } from '@angular/core';
   styleUrl: './tasks.component.css',
 })
 export class TasksComponent {
-  @Input({ required: true }) name!: string;
-  @Input({ required: true }) id!: string;
+  @Input() name?: string;
+  @Input() id?: string;
 }
