@@ -6,6 +6,13 @@ import { type NewTaskData } from './task/task.model';
 export class TasksService {
   private tasks = DUMMYTASKS;
 
+  constructor() {
+    const tasksfromLocalStorage = localStorage.getItem('tasks');
+    if (tasksfromLocalStorage) {
+      this.tasks = JSON.parse(tasksfromLocalStorage);
+    }
+  }
+
   getUserTasks(userId: string) {
     return this.tasks.filter((task) => task.userId === userId);
   }
@@ -17,9 +24,15 @@ export class TasksService {
       userId: userId,
       ...newTask,
     });
+    this.saveTasksToLocalStorage();
   }
 
   removeTask(taskId: string) {
     this.tasks = this.tasks.filter((task) => task.id !== taskId);
+    this.saveTasksToLocalStorage();
+  }
+
+  private saveTasksToLocalStorage() {
+    localStorage.setItem('tasks', JSON.stringify(this.tasks));
   }
 }
