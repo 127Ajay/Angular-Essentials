@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import { DUMMYTASKS } from '../dummy-tasks';
 import { AddTaskComponent } from './add-task/add-task.component';
+import { type NewTaskData } from './task/task.model';
 
 @Component({
   selector: 'app-tasks',
@@ -34,5 +35,15 @@ export class TasksComponent {
   onCancelAddTask() {
     this.isAddingTask = false;
     // Logic to reset the form or close the add task dialog would go here.
+  }
+
+  onTaskCreated(newTask: NewTaskData) {
+    const taskId = Math.random().toString(36).substring(2, 15); // Generate a random ID for the new task
+    this.tasks.unshift({
+      id: taskId,
+      userId: this.userId,
+      ...newTask,
+    });
+    this.isAddingTask = false;
   }
 }
